@@ -3,7 +3,7 @@ import { IoIosSearch } from "react-icons/io"
 
 export default function Home() {
   return (
-    <div>
+    <div className="2xl:container mx-auto">
       <nav className="flex items-center justify-between px-5">
         <div className="flex items-center">
           <Image
@@ -15,7 +15,7 @@ export default function Home() {
           <span className="font-bold text-4xl">Recify</span>
         </div>
         <div className="flex space-x-10">
-          <a className="text-gray-600" href="#">Recipes</a>
+          <a className="text-gray-600" href="/recipes">Recipes</a>
           <a className="text-gray-600" href="#">About</a>
           <a className="text-gray-600" href="#">Contact</a>
         </div>
@@ -25,9 +25,9 @@ export default function Home() {
           </button>
         </div>
       </nav>
-      <main className="mt-10 flex items-center justify-center space-x-5">
+      <main className="mt-36 flex items-center justify-center space-x-5">
         <div className="flex flex-col items-center justify-center w-96 space-y-5">
-          <span className="text-[#a7cd3a] font-bold text-3xl">
+          <span className="text-[#a7cd3a] font-bold text-4xl">
             Cooking 
             <span className="text-black"> with fun made easy and accessible</span>
           </span>
@@ -36,8 +36,8 @@ export default function Home() {
             appeal to beginners and experts alike. Ready to get cooking?
           </span>
           <div className="flex space-x-5">
-            <button type="button" 
-            className="bg-[#b1f8f2] text-white rounded-lg p-2 font-bold text-2xl">Get started</button>
+            <a href="/recipes"
+            className="bg-[#b1f8f2] text-white rounded-lg p-2 font-bold text-2xl">Get started</a>
             <button type="button"
             className="bg-[#d5bbb1] text-white rounded-lg p-2 font-bold text-2xl">Learn more</button>
           </div>
@@ -45,8 +45,8 @@ export default function Home() {
         <div className="overflow-hidden rounded-r-2xl">
           <Image
             src="/food-pexelsimg.jpg"
-            width={500}
-            height={500}
+            width={600}
+            height={600}
             alt="food-pic"
           />
         </div>
