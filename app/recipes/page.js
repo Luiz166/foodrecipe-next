@@ -4,8 +4,15 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import "./style.css"
 import Carousel from "../components/Carousel";
+import { IoIosSearch } from "react-icons/io"
 
 export default function Recipes(){
+
+    const [search, setSearch] = useState("")
+
+    const searchOnChange = (e) => {
+        setSearch(e.target.value)
+    }
 
     const [recipes, setRecipes] = useState([])
 
@@ -42,8 +49,13 @@ export default function Recipes(){
                         alt="Logo"
                         />
                 </a>
-                <input placeholder="Search for a recipe..." type="text" 
-                className="outline-none border rounded-lg py-1 px-2 border-[#a7cd3a] w-full" />
+                <form className="flex w-full" action={`/recipes/search/${search}`}>
+                    <input onChange={searchOnChange} value={search} required placeholder="Search for a recipe..." type="text" 
+                    className="outline-none border rounded-l-lg py-1 px-2 border-[#a7cd3a] w-full" />
+                    <button type="submit" className="rounded-r-lg w-10 flex items-center justify-center text-white text-2xl bg-[#a7cd3a]">
+                        <IoIosSearch/>
+                    </button>
+                </form>
             </header>
             <main className="mt-10 flex flex-col space-y-32 px-3">
                 {trendingRecipes.length > 0 && <Carousel title="Trending" recipes={trendingRecipes} />}
