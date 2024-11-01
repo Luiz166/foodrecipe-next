@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Card from "../components/Card";
 import "./style.css"
+import Carousel from "../components/Carousel";
 
 export default function Recipes(){
 
@@ -31,21 +32,6 @@ export default function Recipes(){
     useEffect(() => {
         apiFetch();
     }, []);
-
-    const scrollRef = useRef(null);
-
-    const scrollLeft = () => {
-        if(scrollRef.current){
-            scrollRef.current.scrollBy({left: -300, behavior: 'smooth'});
-        }
-    }
-
-    const scrollRight = () => {
-        if(scrollRef.current){
-            scrollRef.current.scrollBy({left: 300, behavior: 'smooth'});
-        }
-    }
-
     return(
         <div className="2xl:container mx-auto">
             <header className="flex items-center">
@@ -59,38 +45,8 @@ export default function Recipes(){
                 className="outline-none border rounded-lg py-1 px-2 border-[#a7cd3a] w-full" />
             </header>
             <main className="mt-24 flex flex-col space-y-32 px-3">
-                <div>
-                    <h1 className="font-bold text-3xl">Trending</h1>
-                    <div className="flex items-center mt-5">
-                        <button onClick={scrollLeft} className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700">
-                        ←
-                        </button>
-                        <div className="flex flex-row space-x-5 overflow-x-auto px-5 carousel items-center" ref={scrollRef}>
-                            {trendingRecipes.map((item, index) => {
-                                return <Card data={item} key={index}/>
-                            })}
-                        </div>
-                        <button onClick={scrollRight} className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700">
-                        →
-                        </button>
-                    </div>
-                </div>
-                <div>
-                    <h1 className="font-bold text-3xl">Recent</h1>
-                    <div className="flex items-center mt-5">
-                        <button onClick={scrollLeft} className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700">
-                        ←
-                        </button>
-                        <div className="flex flex-row space-x-5 overflow-x-auto px-5 carousel items-center" ref={scrollRef}>
-                            {recentRecipes.map((item, index) => {
-                                return <Card data={item} key={index}/>
-                            })}
-                        </div>
-                        <button onClick={scrollRight} className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700">
-                        →
-                        </button>
-                    </div>
-                </div>
+                {trendingRecipes.length > 0 && <Carousel title="Trending" recipes={trendingRecipes} />}
+                {recentRecipes.length > 0 && <Carousel title="Recent" recipes={recentRecipes} />}
             </main>
         </div>
     )
