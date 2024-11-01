@@ -1,8 +1,7 @@
 'use client'
 import axios from "axios"
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import Card from "../components/Card";
 import "./style.css"
 import Carousel from "../components/Carousel";
 
@@ -33,18 +32,20 @@ export default function Recipes(){
         apiFetch();
     }, []);
     return(
-        <div className="2xl:container mx-auto">
+        <div className="2xl:container mx-auto px-2">
             <header className="flex items-center">
-                <Image
-                    src="/logo.png"
-                    width={100}
-                    height={100}
-                    alt="Logo"
-                />
+                <a href="/">
+                    <Image
+                        src="/logo.png"
+                        width={100}
+                        height={100}
+                        alt="Logo"
+                        />
+                </a>
                 <input placeholder="Search for a recipe..." type="text" 
                 className="outline-none border rounded-lg py-1 px-2 border-[#a7cd3a] w-full" />
             </header>
-            <main className="mt-24 flex flex-col space-y-32 px-3">
+            <main className="mt-10 flex flex-col space-y-32 px-3">
                 {trendingRecipes.length > 0 && <Carousel title="Trending" recipes={trendingRecipes} />}
                 {recentRecipes.length > 0 && <Carousel title="Recent" recipes={recentRecipes} />}
             </main>
