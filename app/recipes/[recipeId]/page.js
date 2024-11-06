@@ -9,23 +9,46 @@ export default function Page({ params }){
     const recipeId = params.recipeId
 
     const [data, setData] = useState([])
+    const [ytbData, setYtbData] = useState({});
+    const [videoId, setVideoId] = useState(null);
 
-    const apiFetch = async () => {
-        const apiKey = process.env.NEXT_PUBLIC_API_KEY;
-        const apiId = process.env.NEXT_PUBLIC_API_ID;
-        await axios
-        .get(`https://api.edamam.com/api/recipes/v2/${recipeId}?type=public&app_id=${apiId}&app_key=${apiKey}`)
-        .then(res => {
-            const items = res.data.recipe
-            setData(items)
-        })
-        .catch(err => {
-            console.log(err)
-        }) 
-    }
     useEffect(() => {
+        const apiFetch = async () => {
+            const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+            const apiId = process.env.NEXT_PUBLIC_API_ID;
+            await axios
+            .get(`https://api.edamam.com/api/recipes/v2/${recipeId}?type=public&app_id=${apiId}&app_key=${apiKey}`)
+            .then(res => {
+                const items = res.data.recipe
+                setData(items)
+            })
+            .catch(err => {
+                console.log(err)
+            }) 
+        }
+
         apiFetch()
     }, [])
+
+    useEffect(() => {
+        if(!Object.keys(data).length > 0) return;
+
+        const youtubeFetch = async () => {
+            const apiKey = process.env.NEXT_PUBLIC_YTB_API_KEY
+            const query = data.label
+            await axios
+            .get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${query}&relevanceLanguage=en&key=${apiKey}`)
+            .then((res) => {
+                const items = res.data
+                setYtbData(items)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
+
+        youtubeFetch()
+    }, [data])
 
     const totalNutrients = data.totalNutrients
 
@@ -94,6 +117,24 @@ export default function Page({ params }){
                             </tr>
                         </tbody>
                     </table>
+                    {ytbData.items && Array.isArray(ytbData.items) && ytbData.items.length > 0 ? ( // Check if items exists and is an array
+        ytbData.items.map((video, index) => (
+          <div className="mt-5" key={index}>
+            <h3 className="text-center text-2xl font-semibold">Video Instructions</h3>
+            <iframe
+              width="560"
+              height="315"
+              src={`https://www.youtube.com/embed/${video.id.videoId}`}
+              title={video.snippet.title}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+        ))
+      ) : (
+        <p>No YouTube videos found.</p>
+      )}
                 </div>
             </main>
             }
