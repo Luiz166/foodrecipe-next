@@ -21,7 +21,7 @@ export default function HomeNavbar(){
     }
     
     return(
-        <nav className={`flex items-center ${inputStyle.justify} px-1 sm:px-5`}>
+        <nav className={`flex items-center ${inputStyle.justify} sm:justify-between px-1 sm:px-5`}>
                 <div className="flex items-center w-20">
                 <Image
                     src="/logo.png"
@@ -29,7 +29,7 @@ export default function HomeNavbar(){
                     height={100}
                     alt="Logo"
                 />
-                <span className={`${inputStyle.name} font-bold text-3xl`}>Recify</span>
+                <span className={`${inputStyle.name} sm:block font-bold text-3xl`}>Recify</span>
                 </div>
                 <div className="flex space-x-10">
                 <a className="text-gray-600 hidden sm:block" href="/recipes">Recipes</a>
