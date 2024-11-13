@@ -3,6 +3,7 @@ import Image from "next/image"
 import { IoIosSearch } from "react-icons/io"
 import { use, useState, useEffect } from "react"
 import axios from "axios"
+import HomeNavbar from "@/app/components/HomeNavbar"
 
 export default function Page({ params }){
     params = use(params)
@@ -54,27 +55,7 @@ export default function Page({ params }){
 
     return(
         <div className="2xl:container mx-auto px-2">
-            <nav className="flex items-center justify-between px-5">
-                <div className="flex items-center">
-                <Image
-                    src="/logo.png"
-                    width={100}
-                    height={100}
-                    alt="Logo"
-                />
-                <span className="font-bold text-4xl">Recify</span>
-                </div>
-                <div className="flex space-x-10">
-                <a className="text-gray-600" href="/recipes">Recipes</a>
-                <a className="text-gray-600" href="#">About</a>
-                <a className="text-gray-600" href="#">Contact</a>
-                </div>
-                <div className="flex items-center">
-                <button type="button" className="rounded-full bg-gray-300 p-2">
-                    <IoIosSearch size={25}/>
-                </button>
-                </div>
-            </nav>
+            <HomeNavbar/>
             {Object.keys(data).length > 0 &&
             <main className="flex flex-col items-center mt-14 space-y-4">
                 <div className="w-[800px] h-[600px] overflow-hidden rounded-lg">
