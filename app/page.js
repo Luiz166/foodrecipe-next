@@ -1,34 +1,14 @@
 'use client'
 import Image from "next/image";
-import { IoIosSearch } from "react-icons/io"
+import HomeNavbar from "./components/HomeNavbar";
 
 export default function Home() {
   return (
     <div className="2xl:container mx-auto">
-      <nav className="flex items-center justify-between px-5">
-        <div className="flex items-center">
-          <Image
-            src="/logo.png"
-            width={100}
-            height={100}
-            alt="Logo"
-          />
-          <span className="font-bold text-4xl">Recify</span>
-        </div>
-        <div className="flex space-x-10">
-          <a className="text-gray-600" href="/recipes">Recipes</a>
-          <a className="text-gray-600" href="#">About</a>
-          <a className="text-gray-600" href="#">Contact</a>
-        </div>
-        <div className="flex items-center">
-          <button type="button" className="rounded-full bg-gray-300 p-2">
-            <IoIosSearch size={25}/>
-          </button>
-        </div>
-      </nav>
-      <main className="mt-36 flex items-center justify-center space-x-5">
+      <HomeNavbar/>
+      <main className="mt-20 sm:mt-36 flex flex-col sm:flex-row items-center justify-center sm:space-x-5 space-y-5">
         <div className="flex flex-col items-center justify-center w-96 space-y-5">
-          <span className="text-[#a7cd3a] font-bold text-4xl">
+          <span className="text-[#a7cd3a] font-bold text-2xl sm:text-4xl">
             Cooking 
             <span className="text-black"> with fun made easy and accessible</span>
           </span>
@@ -38,12 +18,12 @@ export default function Home() {
           </span>
           <div className="flex space-x-5">
             <a href="/recipes"
-            className="bg-[#b1f8f2] text-white rounded-lg p-2 font-bold text-2xl">Get started</a>
+            className="bg-[#b1f8f2] text-white rounded-lg p-2 font-bold sm:text-2xl">Get started</a>
             <button type="button"
-            className="bg-[#d5bbb1] text-white rounded-lg p-2 font-bold text-2xl">Learn more</button>
-          </div>
+            className="bg-[#d5bbb1] text-white rounded-lg p-2 font-bold sm:text-2xl">Learn more</button>
+           </div>
         </div>
-        <div className="overflow-hidden rounded-r-2xl">
+        <div className="overflow-hidden flex items-center justify-center sm:block sm:rounded-r-2xl">
           <Image
             src="/food-pexelsimg.jpg"
             width={600}
