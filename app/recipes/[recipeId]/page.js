@@ -58,20 +58,20 @@ export default function Page({ params }){
             <HomeNavbar/>
             {Object.keys(data).length > 0 &&
             <main className="flex flex-col items-center mt-14 space-y-4">
-                <div className="w-[800px] h-[600px] overflow-hidden rounded-lg">
+                <div className="sm:w-[800px] sm:h-[600px] overflow-hidden rounded-lg">
                     <img className="w-full h-full object-fill" src={data.image} alt={data.label} />                        
                 </div>
-                <h2 className="text-3xl font-bold">{data.label}</h2>
+                <h2 className="text-2xl sm:text-3xl text-center font-bold">{data.label}</h2>
                 <div>
                     <span className="text-sm text-slate-700">Labels: {data.healthLabels}</span>
                 </div>
                 <div className="flex flex-col">
-                    <h3 className="text-2xl font-semibold">What you'll need</h3>
+                    <h3 className="text-xl sm:text-2xl font-semibold">What you'll need</h3>
                     {data.ingredients.map((item, index) => {
-                        return <span key={index}>{item.text}</span>
+                        return <span className="text-sm" key={index}>{item.text}</span>
                     })}
                 </div>
-                <div className="flex flex-col">
+                <div className="w-full flex flex-col">
                     <h3 className="text-xl font-semibold">Nutritional values</h3>
                     <span>Serving size: {Math.round(data.totalWeight)}g</span>
                     <table className="border">
@@ -98,25 +98,25 @@ export default function Page({ params }){
                             </tr>
                         </tbody>
                     </table>
+                </div>
+
                     {ytbData.items && Array.isArray(ytbData.items) && ytbData.items.length > 0 ? ( // Check if items exists and is an array
         ytbData.items.map((video, index) => (
-          <div className="mt-5" key={index}>
+          <div className="mt-5 flex flex-col items-center justify-center w-full h-[20rem]" key={index}>
             <h3 className="text-center text-2xl font-semibold">Video Instructions</h3>
             <iframe
-              width="560"
-              height="315"
+              className="w-full h-[80%]"
               src={`https://www.youtube.com/embed/${video.id.videoId}`}
               title={video.snippet.title}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-            ></iframe>
+              ></iframe>
           </div>
         ))
-      ) : (
+    ) : (
         <p>No YouTube videos found.</p>
       )}
-                </div>
             </main>
             }
         </div>
